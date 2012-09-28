@@ -17,7 +17,7 @@ public class LavaBoat extends JavaPlugin{
 	private final LBPlayerListener playerlistener = new LBPlayerListener(this);
 	private ArrayList<Player> disabledWalk = new ArrayList<Player>();
 	public static LBConfig config ;
-	String pref = "[LavaBoat] 0.8.1 ";
+	public static final String pref = "[LavaBoat] 0.9 ";
 	
 	/**
 	 * 
@@ -26,6 +26,18 @@ public class LavaBoat extends JavaPlugin{
 	 */
 	public boolean canUseB(Player p) {
         if(p.hasPermission("lb.boats"))
+            	return true;
+        else if(p.hasPermission("lb.*"))
+            	return true;
+        return p.isOp();
+    }
+	/**
+	 * 
+	 * @param p is the specified player
+	 * @return if the specified player can manage worlds enablement
+	 */
+	public boolean canManageWorlds(Player p) {
+        if(p.hasPermission("lb.world"))
             	return true;
         else if(p.hasPermission("lb.*"))
             	return true;
@@ -89,25 +101,37 @@ public class LavaBoat extends JavaPlugin{
 		if(cmd.getName().equalsIgnoreCase("lb")&&args.length==1){ 
 			if(args[0].equalsIgnoreCase("enable")&& sender instanceof Player){
 				Player p = (Player) sender;
+				if(!canManageWorlds(p)){
+					sender.sendMessage(ChatColor.RED+"You do not have acces to that feature.");
+					return true;
+				}
 				config.addWorld(p.getWorld().getName());
 				sender.sendMessage(ChatColor.GREEN+pref+" is now enabled in this world");
 				return true;
 			}
 			else if(args[0].equalsIgnoreCase("disable")&& sender instanceof Player){
 				Player p = (Player) sender;
+				if(!canManageWorlds(p)){
+					sender.sendMessage(ChatColor.RED+"You do not have acces to that feature.");
+					return true;
+				}
 				config.removeWorld(p.getWorld().getName());
 				sender.sendMessage(ChatColor.RED+pref+" is now disabled in this world");
 				return true;
 			}
 			else if(args[0].equalsIgnoreCase("walk")&& sender instanceof Player){
 				Player p = (Player) sender;
+				if(!canWalk(p)){
+					sender.sendMessage(ChatColor.RED+"You do not have acces to that feature.");
+					return true;
+				}
 				if(disabledWalk.contains(p)){
 					disabledWalk.remove(p);
-					sender.sendMessage(ChatColor.GOLD+"Lava walking is now ON ");
+					sender.sendMessage(ChatColor.GOLD+"Lava walking is now OFF ");
 				}
 				else{
 					disabledWalk.add(p);
-					sender.sendMessage(ChatColor.GOLD+"Lava walking is now OFF");
+					sender.sendMessage(ChatColor.GOLD+"Lava walking is now ON");
 				}
 				return true;
 			}

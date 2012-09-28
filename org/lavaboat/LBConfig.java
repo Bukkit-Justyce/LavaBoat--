@@ -86,6 +86,6 @@ public class LBConfig {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-     	return plugin.pref+"Error while reading World.txt!";
+     	return LavaBoat.pref+"Error while reading World.txt!";
 	}
 }
