@@ -1,5 +1,5 @@
 name: LavaBoat
-main: me.Justyce.LavaBoat
+main: org.lavaboat.LavaBoat
 author: _Justyce_
 version: 0.9
 commands:
