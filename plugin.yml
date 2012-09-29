@@ -1,7 +1,7 @@
 name: LavaBoat
 main: org.lavaboat.LavaBoat
 author: _Justyce_
-version: 0.9
+version: 0.9.1
 commands:
   lb:
     description : allow to add or remove a world for the multiworld support
