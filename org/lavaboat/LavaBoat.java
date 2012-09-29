@@ -17,7 +17,7 @@ public class LavaBoat extends JavaPlugin{
 	private final LBPlayerListener playerlistener = new LBPlayerListener(this);
 	private ArrayList<Player> disabledWalk = new ArrayList<Player>();
 	public static LBConfig config ;
-	public static final String pref = "[LavaBoat] 0.9 ";
+	public static final String pref = "[LavaBoat] 0.9.1 ";
 	
 	/**
 	 * 
@@ -121,7 +121,7 @@ public class LavaBoat extends JavaPlugin{
 			}
 			else if(args[0].equalsIgnoreCase("walk")&& sender instanceof Player){
 				Player p = (Player) sender;
-				if(!canWalk(p)){
+				if(!p.isOp()||!p.hasPermission("lb.walk")||!p.hasPermission("lb.*")){
 					sender.sendMessage(ChatColor.RED+"You do not have acces to that feature.");
 					return true;
 				}
