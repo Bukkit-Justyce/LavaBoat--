@@ -86,8 +86,8 @@ public class LBentityListener implements Listener{
 	    		}
 			}
 		}
-		if(event.getEntity() instanceof Vehicle && event.getCause() == DamageCause.PROJECTILE || event.getCause() == DamageCause.ENTITY_ATTACK ||
-				event.getEntityType() == EntityType.BOAT){
+		if(event.getEntity() instanceof Vehicle && event.getCause() == DamageCause.PROJECTILE || event.getCause() == DamageCause.ENTITY_ATTACK && event.getEntity() instanceof Vehicle ||
+				event.getEntityType() == EntityType.BOAT && event.getEntity() instanceof Vehicle){
 			event.setCancelled(false);
 			event.setDamage(1000);
 		}
